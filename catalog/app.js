@@ -25,13 +25,21 @@ app.get('/api/products', (req, res, next) => {
   });
 });
 app.post('/api/products', (req, res, next) => {
-  res.send("add product ");
+  db.products.insert(req.body, (err,docs) => {
+    if (err) {
+      res.status(503).send(err);
+    } else {
+      res.status(201).send();
+    }
+  });
 });
 
 app.get('/api/products/:id', (req, res, next) => {
-  db.products.find({
-    id: req.params.id
-  }, (err, docs) => {
+  let criteria = {
+    _id: mongoJs.ObjectId(req.params.id)
+  };
+  console.log("criteria", criteria);
+  db.products.findOne(criteria, (err, docs) => {
     if (err) {
       res.status(503).send(err);
     } else if (docs.length == 0) {
@@ -43,11 +51,29 @@ app.get('/api/products/:id', (req, res, next) => {
 });
 
 app.put('/api/products/:id', (req, res, next) => {
-  res.send("product by id " + req.params.id);
+  let criteria = {
+    _id: mongoJs.ObjectId(req.params.id)
+  };
+  let update = {
+    $set: {
+    }
+  };
+  req.body.name && (update['$set']['name'] = req.body.name);
+  req.body.model && (update['$set']['model'] = req.body.model);
+  req.body.category && (update['$set']['category'] = req.body.category);
+
+  db.products.findAndModify({query: criteria, update: update, new: true }, (err,docs) => {
+    if (err) {
+      res.status(503).send(err);
+    } else {
+      res.status(200).send();
+    }
+  });
 });
+
 app.delete('/api/products/:id', (req, res, next) => {
   db.products.remove({
-    id: req.params.id
+    id: mongoJs.ObjectId(req.params.id)
   }, (err, status) => {
     if (err) {
       res.status(503).send(err);
