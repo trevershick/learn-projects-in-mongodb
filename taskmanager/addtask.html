@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+  </head>
+  <body>
+
+<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="#" onClick="gotoTasks();">Home</a></li>
+            <li role="presentation" class="active"><a href="#" onClick="gotoAddTask();">Add Task</a></li>
+            <li role="presentation"><a href="#" onClick="gotoCategories();">Categories</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Task Manager</h3>
+      </div>
+
+
+
+      <div class="row marketing">
+        <div class="col-lg-12">
+
+          <h2 class="page-header">Add task</h2>
+          <form id="add-task">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" name="name" id="name" class="form-control" placeholder="Name"/>
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select name="category" id="category" class="form-control">
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Due Date</label>
+              <input type="date" name="due_date" id="due_date" class="form-control" placeholder="Due Date"/>
+            </div>
+            <div class="form-group">
+              <label>Urgent</label>
+              <input type="checkbox" name="urgent" id="urgent" class="form-control" placeholder="Urgent"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+
+      </div>
+
+      <footer class="footer">
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
